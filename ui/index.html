@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👑 SOLANA TITAN ENGINE — Dual-Strike &amp; Swarm Syndicate</title>
+  <style>
+    :root {
+      --bg: #030712;
+      --card-bg: #0b1329;
+      --border: #1e293b;
+      --gold: #f59e0b;
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #8b5cf6;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 16px;
+      line-height: 1.5;
+    }
+
+    .container { max-width: 1350px; margin: 0 auto; }
+
+    /* HEADER */
+    .header-bar {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 25px rgba(245, 158, 11, 0.12);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 20px; font-size: 0.72rem;
+      font-family: var(--font-mono); font-weight: bold;
+    }
+    .badge-gold { background: rgba(245, 158, 11, 0.2); color: var(--gold); border: 1px solid var(--gold); }
+    .badge-cyan { background: rgba(6, 182, 212, 0.2); color: var(--cyan); border: 1px solid var(--cyan); }
+    .badge-green { background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); }
+    .badge-silent { background: rgba(51, 65, 85, 0.3); color: #94a3b8; border: 1px solid #334155; }
+
+    /* TAB SWITCHER */
+    .tab-nav {
+      display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
+    }
+    .tab-btn {
+      padding: 10px 18px; border-radius: 6px; font-size: 0.82rem; font-family: var(--font-mono);
+      font-weight: bold; cursor: pointer; background: #0f172a; color: var(--text-muted); border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: rgba(245, 158, 11, 0.15); color: var(--gold); border-color: var(--gold);
+    }
+
+    /* GRID PANELS */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .panel {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px;
+    }
+    .panel-title {
+      font-size: 0.88rem; font-weight: bold; font-family: var(--font-mono); margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 10px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: bold;
+      font-family: var(--font-mono); cursor: pointer; display: inline-flex; align-items: center;
+      gap: 6px; border: 1px solid transparent; transition: all 0.2s;
+    }
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-cyan { background: var(--cyan); color: #000; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-outline { background: transparent; border-color: var(--border); color: #fff; }
+    .btn:hover { filter: brightness(1.15); }
+
+    /* DRONES DISPLAY */
+    .drones-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 10px;
+    }
+    .drone-box {
+      background: #020617; border: 1px solid var(--border); border-radius: 6px; padding: 8px;
+      font-family: var(--font-mono); font-size: 0.68rem; text-align: center;
+    }
+
+    pre code {
+      display: block; background: #020617; border: 1px solid var(--border); border-radius: 6px;
+      padding: 12px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan);
+      max-height: 480px; overflow-y: auto; line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header-bar">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 2.2rem;">👑</span>
+        <div>
+          <div style="font-size: 1.35rem; font-weight: 900; letter-spacing: 1px; color: #fff;">
+            SOLANA TITAN ENGINE — ON-CHAIN MEV ARCHITECTURE
+          </div>
+          <div style="font-size: 0.72rem; color: var(--gold); font-family: var(--font-mono);">
+            REVERSE-ENGINEERED RUST SMART CONTRACTS &bull; DUAL-STRIKE &bull; TITAN SWARM ORCHESTRATOR
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <span class="badge badge-gold">🦀 RUST ZERO-COPY (1,644 CU)</span>
+        <span class="badge badge-cyan">JITO ERROR 26 RAM SHIELD</span>
+        <span class="badge badge-silent">🔇 100% SILENT (ZERO AUDIO)</span>
+      </div>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('simple')">🗡️ MODE A: 2-WALLET DUAL-STRIKE (SIMPLE)</button>
+      <button class="tab-btn" onclick="switchTab('swarm')">👑 MODE B: SOPHISTICATED SWARM (12 DRONES)</button>
+      <button class="tab-btn" onclick="switchTab('rust')">🦀 RUST SMART CONTRACTS &amp; BYTECODE</button>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: SIMPLE DUAL STRIKE -->
+    <!-- ========================================================================= -->
+    <div id="tab-simple">
+      <div class="grid-2">
+        
+        <!-- CONTROL PANEL -->
+        <div class="panel">
+          <div class="panel-title" style="color: var(--cyan);">
+            <span>🗡️ DUAL-STRIKE LAUNCH CONTROLLER</span>
+            <span class="badge badge-cyan" id="ds-status-badge">READY TO LAUNCH</span>
+          </div>
+
+          <div style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 14px; line-height: 1.5;">
+            • <strong>Wallet 0 (Deployer):</strong> Creates token + buys <strong>0.05 SOL</strong> (&lt;0.8% dev bag &rarr; clean on BubbleMaps).<br>
+            • <strong>Wallet 1 (Shadow Sniper):</strong> Atomically buys <strong>1.5 SOL</strong> in the exact same Block 0 Jito bundle.<br>
+            • <strong>8-Second Blitz:</strong> Holds for 8 seconds while retail pushes curve up, then force-liquidates with <strong>Rent Reclamation</strong> before the dev dump window (15–39s).
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <button class="btn btn-gold" id="btn-ds-launch" onclick="launchDualStrike()">
+              <span>⚡</span> 1-CLICK DUAL-STRIKE LAUNCH
+            </button>
+            <button class="btn btn-red" id="btn-ds-exit" onclick="exitDualStrike()" disabled>
+              <span>🚨</span> FORCE 8S BLITZ EXIT
+            </button>
+          </div>
+
+          <!-- 8S BLITZ TIMER -->
+          <div style="background: #020617; border: 1px solid var(--border); border-radius: 6px; padding: 12px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-family: var(--font-mono); margin-bottom: 6px;">
+              <span>8S BLITZ WINDOW</span>
+              <strong id="ds-timer-text" style="color: var(--gold);">0.0s / 8.0s</strong>
+            </div>
+            <div style="width: 100%; height: 10px; background: #0f172a; border-radius: 4px; overflow: hidden;">
+              <div id="ds-progress-bar" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.3s;"></div>
+            </div>
+          </div>
+
+          <!-- RENT RECLAMATION RECEIPT -->
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--green); border-radius: 6px; padding: 10px; font-size: 0.72rem; font-family: var(--font-mono);">
+            <strong style="color: var(--green);">🌾 RENT RECLAMATION PROTOCOL:</strong>
+            <div style="color: #cbd5e1; margin-top: 2px;">
+              Automatically closes the temporary Token-2022 ATA account upon exit and returns <strong>+1,513,840 lamports (+0.002039 SOL)</strong> directly into your SOL balance.
+            </div>
+          </div>
+        </div>
+
+        <!-- TELEMETRY & PROFIT GAUGE -->
+        <div class="panel">
+          <div class="panel-title" style="color: var(--gold);">
+            <span>📊 REAL-TIME POSITION TELEMETRY</span>
+            <span class="badge badge-gold" id="ds-pnl-badge">+0.00 SOL (0.0%)</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: var(--font-mono); margin-bottom: 14px;">
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">SNIPER ENTRY COST</div>
+              <strong id="ds-entry-cost" style="color: #fff; font-size: 1.1rem;">1.500 SOL</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">CURRENT SOL VALUE</div>
+              <strong id="ds-curr-val" style="color: var(--green); font-size: 1.1rem;">1.500 SOL</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">CURVE PROGRESS</div>
+              <strong id="ds-curve-pct" style="color: var(--cyan); font-size: 1.1rem;">0.0%</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">ESTIMATED MARKET CAP</div>
+              <strong id="ds-mcap" style="color: var(--gold); font-size: 1.1rem;">30.0 SOL</strong>
+            </div>
+          </div>
+
+          <div id="ds-receipt-box" style="display: none; background: #020617; border: 1px solid var(--green); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.75rem;">
+            <strong style="color: var(--green);">💰 8S BLITZ EXTRACTION RECEIPT:</strong>
+            <div id="ds-receipt-content" style="color: #cbd5e1; margin-top: 6px; line-height: 1.5;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: SOPHISTICATED SWARM -->
+    <!-- ========================================================================= -->
+    <div id="tab-swarm" style="display: none;">
+      <div class="grid-2">
+
+        <!-- SWARM CONTROLLER -->
+        <div class="panel">
+          <div class="panel-title" style="color: var(--gold);">
+            <span>👑 TITAN SWARM (12-DRONE ORCHESTRATOR)</span>
+            <span class="badge badge-gold" id="swarm-status-badge">READY</span>
+          </div>
+
+          <div style="font-size: 0.75rem; color: #cbd5e1; margin-bottom: 14px; line-height: 1.5;">
+            • <strong>Master Vault:</strong> <span style="color: var(--cyan); font-family: var(--font-mono);">Bpkb7aUKy2hQSzWVdskemtBZXLtk6qY6uVJ7ggkwiMjv</span><br>
+            • <strong>12 Drones:</strong> Each drone purchases <strong>0.08 - 0.15 SOL</strong> across Block 0, 1, and 2.<br>
+            • <strong>DexScreener Trending:</strong> 35 transactions in 2.5s automatically triggers <strong>#1 HOT TRENDING</strong> banner.<br>
+            • <strong>Staggered 3-Tranche Exit:</strong> Tranche 1 @ 5s (40%), Tranche 2 @ 7.5s (60%), Tranche 3 @ 10s (100% full exit + rent harvest).
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <button class="btn btn-gold" id="btn-swarm-launch" onclick="launchSwarmCampaign()">
+              <span>🚀</span> LAUNCH SWARM CAMPAIGN
+            </button>
+            <button class="btn btn-cyan" id="btn-swarm-step" onclick="stepSwarmSimulation()" disabled>
+              <span>⏩</span> ADVANCE WAVE (+2.5s)
+            </button>
+          </div>
+
+          <div style="font-size: 0.75rem; font-weight: bold; color: var(--cyan); margin-bottom: 6px;">
+            🤖 ACTIVE SWARM DRONES (DISPERSED BUBBLEMAPS HOLDINGS):
+          </div>
+          <div class="drones-grid" id="drones-container">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- SWARM TELEMETRY -->
+        <div class="panel">
+          <div class="panel-title" style="color: var(--green);">
+            <span>📈 SYNDICATE HARVEST TELEMETRY</span>
+            <span class="badge badge-green" id="swarm-trending-badge">READY</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: var(--font-mono); margin-bottom: 14px;">
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">TOTAL SOL DEPLOYED</div>
+              <strong id="swarm-deployed" style="color: #fff; font-size: 1.1rem;">0.00 SOL</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">SOL HARVESTED TO VAULT</div>
+              <strong id="swarm-harvested" style="color: var(--green); font-size: 1.1rem;">0.00 SOL</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">NET PROFIT EXTRACTED</div>
+              <strong id="swarm-profit" style="color: var(--gold); font-size: 1.1rem;">+0.00 SOL</strong>
+            </div>
+            <div style="background: #020617; padding: 10px; border-radius: 6px; border: 1px solid var(--border);">
+              <div style="color: var(--text-muted); font-size: 0.68rem;">12-ATA RENT RECLAIMED</div>
+              <strong id="swarm-rent" style="color: var(--cyan); font-size: 1.1rem;">+0.02447 SOL</strong>
+            </div>
+          </div>
+
+          <div id="swarm-summary-box" style="display: none; background: #020617; border: 1px solid var(--gold); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.75rem;">
+            <strong style="color: var(--gold);">🏆 SWARM CAMPAIGN COMPLETE:</strong>
+            <div id="swarm-summary-content" style="color: #cbd5e1; margin-top: 6px; line-height: 1.5;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: RUST SMART CONTRACTS -->
+    <!-- ========================================================================= -->
+    <div id="tab-rust" style="display: none;">
+      <div class="panel">
+        <div class="panel-title" style="color: var(--cyan);">
+          <span>🦀 REVERSE-ENGINEERED RUST SOURCE CODE</span>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.7rem;" onclick="loadRustCode('dual_strike')">dual_strike (Simple)</button>
+            <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.7rem;" onclick="loadRustCode('titan_swarm')">titan_swarm (Sophisticated)</button>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-family: var(--font-mono);">
+          Zero-copy on-chain Solana eBPF program. Compiles with <code>cargo build-sbf</code> into 1,644 CU binary.
+        </div>
+        <pre><code id="rust-code-view">// Loading Rust smart contract source...</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+    let dsTimerInterval = null;
+    let dsElapsed = 0.0;
+    let swarmElapsed = 0.0;
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-simple').style.display = 'none';
+      document.getElementById('tab-swarm').style.display = 'none';
+      document.getElementById('tab-rust').style.display = 'none';
+
+      if (tab === 'simple') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('tab-simple').style.display = 'block';
+      } else if (tab === 'swarm') {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('tab-swarm').style.display = 'block';
+        initDrones();
+      } else if (tab === 'rust') {
+        document.querySelectorAll('.tab-btn')[2].classList.add('active');
+        document.getElementById('tab-rust').style.display = 'block';
+        loadRustCode('dual_strike');
+      }
+    }
+
+    // --- MODE A: DUAL STRIKE ---
+    async function launchDualStrike() {
+      try {
+        const res = await fetch(`${API_BASE}/api/dual_strike/launch`, { method: 'POST' });
+        const data = await res.json();
+        
+        document.getElementById('ds-status-badge').innerText = "ARMED & SNIPING";
+        document.getElementById('btn-ds-launch').disabled = true;
+        document.getElementById('btn-ds-exit').disabled = false;
+        document.getElementById('ds-receipt-box').style.display = 'none';
+
+        dsElapsed = 0.0;
+        clearInterval(dsTimerInterval);
+        dsTimerInterval = setInterval(async () => {
+          dsElapsed += 0.5;
+          document.getElementById('ds-timer-text').innerText = `${dsElapsed.toFixed(1)}s / 8.0s`;
+          document.getElementById('ds-progress-bar').style.width = `${(dsElapsed / 8.0) * 100}%`;
+
+          // Fetch step telemetry
+          const stepRes = await fetch(`${API_BASE}/api/dual_strike/step`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ elapsed: dsElapsed })
+          });
+          const step = await stepRes.json();
+          if (step.current_value_sol) {
+            document.getElementById('ds-curr-val').innerText = `${step.current_value_sol.toFixed(3)} SOL`;
+            document.getElementById('ds-pnl-badge').innerText = `+${step.unrealized_pnl_sol.toFixed(3)} SOL (+${step.roi_percent}%)`;
+            document.getElementById('ds-curve-pct').innerText = `${step.curve_progress}%`;
+            document.getElementById('ds-mcap').innerText = `${step.market_cap_sol} SOL`;
+          }
+
+          if (dsElapsed >= 8.0) {
+            clearInterval(dsTimerInterval);
+            exitDualStrike();
+          }
+        }, 500);
+
+      } catch (e) {
+        alert("Launch error: " + e);
+      }
+    }
+
+    async function exitDualStrike() {
+      clearInterval(dsTimerInterval);
+      try {
+        const res = await fetch(`${API_BASE}/api/dual_strike/exit`, { method: 'POST' });
+        const d = await res.json();
+
+        document.getElementById('ds-status-badge').innerText = "LIQUIDATED (PROFIT SWEPT)";
+        document.getElementById('btn-ds-launch').disabled = false;
+        document.getElementById('btn-ds-exit').disabled = true;
+
+        document.getElementById('ds-receipt-content').innerHTML = `
+          • <strong>Initial Snipe:</strong> ${d.entry_cost_sol} SOL<br>
+          • <strong>Tokens Liquidated:</strong> +${d.sol_received} SOL<br>
+          • <strong>ATA Rent Reclaimed:</strong> +${d.rent_reclaimed_sol} SOL<br>
+          • <strong>Total SOL Extracted:</strong> <span style="color: var(--green); font-weight: bold;">+${d.total_extracted_sol} SOL</span><br>
+          • <strong>Net Profit:</strong> <span style="color: var(--gold); font-weight: bold;">+${d.net_profit_sol} SOL (+${d.roi_percent}% ROI)</span><br>
+          • <strong>Reason:</strong> ${d.exit_reason}
+        `;
+        document.getElementById('ds-receipt-box').style.display = 'block';
+      } catch (e) {
+        alert("Exit error: " + e);
+      }
+    }
+
+    // --- MODE B: TITAN SWARM ---
+    function initDrones() {
+      const container = document.getElementById('drones-container');
+      if (container.children.length > 0) return;
+      let html = "";
+      for (let i = 1; i <= 12; i++) {
+        html += `
+          <div class="drone-box" id="drone-${i}">
+            <div style="color: var(--cyan); font-weight: bold;">DRONE-${i < 10 ? '0' + i : i}</div>
+            <div style="color: var(--text-muted); font-size: 0.62rem;">Dr0ne${i}...</div>
+            <div style="color: var(--gold); margin-top: 4px;" id="drone-val-${i}">0.12 SOL</div>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+    }
+
+    async function launchSwarmCampaign() {
+      try {
+        const res = await fetch(`${API_BASE}/api/swarm/launch`, { method: 'POST' });
+        const d = await res.json();
+
+        document.getElementById('swarm-status-badge').innerText = "SWARM ACTIVE";
+        document.getElementById('swarm-trending-badge').innerText = "🔥 #1 TRENDING DEXSCREENER";
+        document.getElementById('btn-swarm-launch').disabled = true;
+        document.getElementById('btn-swarm-step').disabled = false;
+        document.getElementById('swarm-summary-box').style.display = 'none';
+
+        document.getElementById('swarm-deployed').innerText = `${d.total_sol_deployed} SOL`;
+        swarmElapsed = 0.0;
+      } catch (e) {
+        alert("Swarm launch error: " + e);
+      }
+    }
+
+    async function stepSwarmSimulation() {
+      swarmElapsed += 2.5;
+      try {
+        const res = await fetch(`${API_BASE}/api/swarm/step`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ elapsed: swarmElapsed })
+        });
+        const d = await res.json();
+
+        document.getElementById('swarm-harvested').innerText = `${d.total_sol_harvested.toFixed(3)} SOL`;
+        document.getElementById('swarm-profit').innerText = `${d.net_profit_sol >= 0 ? '+' : ''}${d.net_profit_sol.toFixed(3)} SOL (${d.roi_percent}%)`;
+        document.getElementById('swarm-rent').innerText = `+${d.rent_reclaimed_sol} SOL`;
+
+        if (d.status === "SWARM_HARVEST_COMPLETE") {
+          document.getElementById('btn-swarm-launch').disabled = false;
+          document.getElementById('btn-swarm-step').disabled = true;
+          document.getElementById('swarm-status-badge').innerText = "HARVEST COMPLETE";
+
+          document.getElementById('swarm-summary-content').innerHTML = `
+            • <strong>Total SOL Deployed:</strong> ${d.total_sol_deployed} SOL (12 Drones)<br>
+            • <strong>Total SOL Harvested:</strong> +${d.total_sol_harvested} SOL<br>
+            • <strong>12-ATA Rent Swept to Vault:</strong> +${d.rent_reclaimed_sol} SOL<br>
+            • <strong>Net Extracted Profit:</strong> <span style="color: var(--green); font-weight: bold;">+${d.net_profit_sol} SOL (+${d.roi_percent}% ROI)</span><br>
+            • <strong>Master Treasury:</strong> Bpkb7aUKy2hQSzWVdskemtBZXLtk6qY6uVJ7ggkwiMjv
+          `;
+          document.getElementById('swarm-summary-box').style.display = 'block';
+        }
+      } catch (e) {
+        alert("Step error: " + e);
+      }
+    }
+
+    // --- TAB 3: RUST CODE ---
+    async function loadRustCode(target) {
+      try {
+        const res = await fetch(`${API_BASE}/api/rust_code?target=${target}`);
+        const code = await res.text();
+        document.getElementById('rust-code-view').innerText = code;
+      } catch (e) {
+        document.getElementById('rust-code-view').innerText = "// Failed to load code: " + e;
+      }
+    }
+  </script>
+</body>
+</html>

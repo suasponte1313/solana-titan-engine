@@ -1,0 +1,17 @@
+[package]
+name = "dual_strike"
+version = "0.1.0"
+description = "Dual-Strike 2-Wallet Atomic Ghost Sniper for Pump.fun"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+solana-program = "1.18.26"
+spl-token = { version = "4.0.1", features = ["no-entrypoint"] }
+thiserror = "1.0"
+
+[features]
+no-entrypoint = []
+default = []

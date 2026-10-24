@@ -1,0 +1,13 @@
+[workspace]
+members = [
+    "programs/dual_strike",
+    "programs/titan_swarm",
+]
+resolver = "2"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+overflow-checks = false
